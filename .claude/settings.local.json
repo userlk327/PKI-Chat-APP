@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(venv/Scripts/python.exe -c \"from Crypto.Signature import pkcs1_15; from Crypto.Hash import SHA256; print\\('OK'\\)\")"
-    ]
-  }
-}
