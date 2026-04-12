@@ -164,6 +164,7 @@ def main():
     server_host = input("  Enter server IP     : ").strip()
 
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.settimeout(5)
     try:
         sock.connect((server_host, PORT))
     except ConnectionRefusedError:
@@ -175,6 +176,11 @@ def main():
         print("    Enter a valid IP address (e.g. 127.0.0.1 for same machine,")
         print("    or the IP shown by 'This is your IP' on the server).")
         return
+    except (TimeoutError, socket.timeout):
+        print(f"[!] Connection timed out. '{server_host}' is unreachable or not responding.")
+        print("    Check the IP address and make sure the server is running.")
+        return
+    sock.settimeout(None)
 
     # ── Handshake ─────────────────────────────────────────────────────────────
     # 1. Send username
